@@ -1,0 +1,252 @@
+esphome:
+  name: $devicename
+  platform: ESP8266
+  board: esp12e
+  includes:
+    - DomoNode/DomoNode21.h
+    - DomoNode/PCA9555.h
+    - DomoNode/PCA9555.cpp
+
+custom_component:
+  - id: ${devicename}_dn
+    lambda: |-
+      auto d = new DomoNode21();
+      return {d};
+
+output:
+  - platform: custom
+    type: binary
+    lambda: |-
+      auto rl = new DN21Relay(1);
+      App.register_component(rl);
+      return {rl};
+    outputs:
+      - id: ${devicename}_rl1
+  - platform: custom
+    type: binary
+    lambda: |-
+      auto rl = new DN21Relay(2);
+      App.register_component(rl);
+      return {rl};
+    outputs:
+      - id: ${devicename}_rl2
+  - platform: custom
+    type: binary
+    lambda: |-
+      auto rl = new DN21Relay(3);
+      App.register_component(rl);
+      return {rl};
+    outputs:
+      - id: ${devicename}_rl3
+  - platform: custom
+    type: binary
+    lambda: |-
+      auto rl = new DN21Relay(4);
+      App.register_component(rl);
+      return {rl};
+    outputs:
+      - id: ${devicename}_rl4
+  - platform: custom
+    type: binary
+    lambda: |-
+      auto rl = new DN21Relay(5);
+      App.register_component(rl);
+      return {rl};
+    outputs:
+      - id: ${devicename}_rl5
+  - platform: custom
+    type: binary
+    lambda: |-
+      auto rl = new DN21Relay(6);
+      App.register_component(rl);
+      return {rl};
+    outputs:
+      - id: ${devicename}_rl6
+  - platform: custom
+    type: binary
+    lambda: |-
+      auto l = new DN21Led(0);
+      App.register_component(l);
+      return {l};
+    outputs:
+      - id: ${devicename}_ledconn
+  - platform: custom
+    type: binary
+    lambda: |-
+      auto l = new DN21Led(1);
+      App.register_component(l);
+      return {l};
+    outputs:
+      - id: ${devicename}_ledusr
+  - platform: custom
+    type: binary
+    lambda: |-
+      auto l = new DN21Led(2);
+      App.register_component(l);
+      return {l};
+    outputs:
+      - id: ${devicename}_led1
+  - platform: custom
+    type: binary
+    lambda: |-
+      auto l = new DN21Led(3);
+      App.register_component(l);
+      return {l};
+    outputs:
+      - id: ${devicename}_led2
+  - platform: custom
+    type: binary
+    lambda: |-
+      auto l = new DN21Led(4);
+      App.register_component(l);
+      return {l};
+    outputs:
+      - id: ${devicename}_led3
+  - platform: custom
+    type: binary
+    lambda: |-
+      auto l = new DN21Led(5);
+      App.register_component(l);
+      return {l};
+    outputs:
+      - id: ${devicename}_led4
+  - platform: custom
+    type: binary
+    lambda: |-
+      auto l = new DN21Led(6);
+      App.register_component(l);
+      return {l};
+    outputs:
+      - id: ${devicename}_led5
+  - platform: custom
+    type: binary
+    lambda: |-
+      auto l = new DN21Led(7);
+      App.register_component(l);
+      return {l};
+    outputs:
+      - id: ${devicename}_led6
+
+switch:
+  - platform: output
+    name: "${upper_devicename} Relay 1"
+    id: ${devicename}_rl_1
+    output: ${devicename}_rl1
+  - platform: output
+    name: "${upper_devicename} Relay 2"
+    id: ${devicename}_rl_2
+    output: ${devicename}_rl2
+  - platform: output
+    name: "${upper_devicename} Relay 3"
+    id: ${devicename}_rl_3
+    output: ${devicename}_rl3
+  - platform: output
+    name: "${upper_devicename} Relay 4"
+    id: ${devicename}_rl_4
+    output: ${devicename}_rl4
+  - platform: output
+    name: "${upper_devicename} Relay 5"
+    id: ${devicename}_rl_5
+    output: ${devicename}_rl5
+  - platform: output
+    name: "${upper_devicename} Relay 6"
+    id: ${devicename}_rl_6
+    output: ${devicename}_rl6
+
+light:
+  - platform: binary
+    id: ${upper_devicename}_Led_Conn
+    name: "${upper_devicename} Led Conn"
+    output: ${devicename}_ledconn
+    restore_mode: ALWAYS_OFF
+  - platform: binary
+    id: ${upper_devicename}_Led_User
+    name: "${upper_devicename} Led Usr"
+    output: ${devicename}_ledusr
+    restore_mode: ALWAYS_OFF
+  - platform: binary
+    id: ${upper_devicename}_Led_1
+    name: "${upper_devicename} Led 1"
+    output: ${devicename}_led1
+    restore_mode: ALWAYS_OFF
+  - platform: binary
+    id: ${upper_devicename}_Led_2
+    name: "${upper_devicename} Led 2"
+    output: ${devicename}_led2
+    restore_mode: ALWAYS_OFF
+  - platform: binary
+    id: ${upper_devicename}_Led_3
+    name: "${upper_devicename} Led 3"
+    output: ${devicename}_led3
+    restore_mode: ALWAYS_OFF
+  - platform: binary
+    id: ${upper_devicename}_Led_4
+    name: "${upper_devicename} Led 4"
+    output: ${devicename}_led4
+    restore_mode: ALWAYS_OFF
+  - platform: binary
+    id: ${upper_devicename}_Led_5
+    name: "${upper_devicename} Led 5"
+    output: ${devicename}_led5
+    restore_mode: ALWAYS_OFF
+  - platform: binary
+    id: ${upper_devicename}_Led_6
+    name: "${upper_devicename} Led 6"
+    output: ${devicename}_led6
+    restore_mode: ALWAYS_OFF
+
+binary_sensor:
+  - platform: custom
+    lambda: |-
+      auto l = new DN21In(0);
+      App.register_component(l);
+      return {l};
+    binary_sensors:
+      - id: ${devicename}_in1
+        name: "${upper_devicename} In 1"
+  - platform: custom
+    lambda: |-
+      auto l = new DN21In(1);
+      App.register_component(l);
+      return {l};
+    binary_sensors:
+      - id: ${devicename}_in2
+        name: "${upper_devicename} In 2"
+  - platform: custom
+    lambda: |-
+      auto l = new DN21In(2);
+      App.register_component(l);
+      return {l};
+    binary_sensors:
+      - id: ${devicename}_in3
+        name: "${upper_devicename} In 3"
+  - platform: custom
+    lambda: |-
+      auto l = new DN21In(3);
+      App.register_component(l);
+      return {l};
+    binary_sensors:
+      - id: ${devicename}_in4
+        name: "${upper_devicename} In 4"
+  - platform: custom
+    lambda: |-
+      auto l = new DN21In(4);
+      App.register_component(l);
+      return {l};
+    binary_sensors:
+      - id: ${devicename}_in5
+        name: "${upper_devicename} In 5"
+  - platform: custom
+    lambda: |-
+      auto l = new DN21In(5);
+      App.register_component(l);
+      return {l};
+    binary_sensors:
+      - id: ${devicename}_in6
+        name: "${upper_devicename} In 6"
+
+# Enable logging
+logger:
+
+# Enable Home Assistant API
+api:
